@@ -1,0 +1,7 @@
+A música deve conter alguns atributos:
+
+- Nome (String)
+- Artista (String)
+- Lançamento (Int)
+- ID (Int)
+- Duração (DateTime)
