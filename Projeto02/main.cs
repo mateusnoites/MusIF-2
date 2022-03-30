@@ -11,10 +11,10 @@ class Program {
         Program.op = MenuPrincipal();
         switch(Program.op) {
           case 'A' : case 'a' : PlaylistInserir(); break;
-          case 'B' : case 'b' : PlaylistAtualizar(); break;
+          case 'B' : case 'b' : MenuAtualizar(); break;
           case 'C' : case 'c' : PlaylistExcluir(); break;
           case 'D' : case 'd' : PlaylistListar(); break;
-          case 'F' : case 'f' : Finalizar(); break;
+          case 'X' : case 'x' : Finalizar(); break;
         }
       } catch (Exception erro) {
         Program.op = 'Z'; // Colocar uma opção pra escolher se quer ou não continuar no aplicativo.
@@ -31,17 +31,10 @@ class Program {
     Visuals.Esquerda("C - Apagar uma Playlist");
     Visuals.Esquerda("D - Listar as Playlists cadastradas");
     Visuals.LinhaDivisoria();
-    Visuals.Esquerda("F - Finalizar o MusIF");
+    Visuals.Esquerda("X - Finalizar o MusIF");
     Visuals.Finalizacao();
     
-    /*Console.WriteLine("Escolha uma opção.");
-    Console.WriteLine("A - Inserir uma nova Playlist.");
-    Console.WriteLine("B - Listar as Playlists cadastradas.");
-    Console.WriteLine("C - Atualizar uma playlist.");
-    Console.WriteLine("D - Excluir uma playlist.");
-    Console.WriteLine("F - Finalizar o sistema.");
-
-    Console.Write("Opção: ");*/
+    Visuals.Resposta();
     char op = char.Parse(Console.ReadLine());
 
     return op;
@@ -66,18 +59,49 @@ class Program {
       Console.WriteLine(obj);
     }
   }
-  public static void PlaylistAtualizar() {
-    Console.WriteLine("Atualizar uma playlist.");
-    // Dados da playlist
-    Console.Write("Informe o ID da Playlist a ser atualizada: ");
-    int id = int.Parse(Console.ReadLine());
-    Console.Write("Informe o novo Nome: ");
-    string nome = Console.ReadLine();
-    // Instanciar a classe Playlist
-    Playlist obj = new Playlist(id, nome);
-    // Atualizar a playlist no sistema
-    Sistema.PlaylistAtualizar(obj);
-    Console.WriteLine("Playlist atualizada.");
+  public static void MenuAtualizar() {
+    Visuals.CaixaCabecalho();
+    Console.WriteLine();
+    Visuals.CaixaTituloLonga("Editar uma Playlist");
+    Visuals.Centralizar("Lista das Playlists criadas");
+    Visuals.LinhaVazia();
+    if (Sistema.nPlaylist <= 0) {
+      Visuals.Centralizar("Você ainda não criou nenhuma Playlist.");
+      Visuals.Finalizacao();
+    } else {
+      foreach (Playlist obj in Sistema.PlaylistListar()) {
+        Visuals.Esquerda(Convert.ToString(obj));
+      }
+      Visuals.LinhaDivisoria();
+      Visuals.Centralizar("Qual é o ID da Playlist a ser editada?");
+      Visuals.Finalizacao();
+      Visuals.Resposta();
+
+      int id = int.Parse(Console.ReadLine());
+
+      // Nome
+      Visuals.CaixaCabecalho();
+      Console.WriteLine();
+      Visuals.CaixaTituloLonga("Editar uma Playlist");
+      Visuals.Centralizar("Lista das Playlists criadas");
+      Visuals.LinhaVazia();
+      foreach (Playlist obj in Sistema.PlaylistListar()) {
+        Visuals.Esquerda(Convert.ToString(obj));
+      }
+      Visuals.LinhaDivisoria();
+      Visuals.Centralizar($"Qual será o novo nome da Playlist {id}?");
+      Visuals.Finalizacao();
+      Visuals.Resposta();
+      string nome = Console.ReadLine();
+
+      // Instanciar a classe Playlist
+      Playlist objeto = new Playlist(id, nome);
+      // Atualizar a playlist no sistema
+      Sistema.PlaylistAtualizar(objeto);
+
+      Visuals.CaixaCabecalho();
+      Visuals.CaixaTituloCurta("Edições salvas.");
+    }
   }
   public static void PlaylistExcluir() {
     Console.WriteLine("Excluir uma playlist.");

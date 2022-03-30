@@ -43,7 +43,7 @@ public class Visuals {
 
   public static void Resposta() {
     Console.WriteLine();
-    Console.Write(" ▶ ");
+    Console.Write(" 👉 ");
   }
 
   public static void Centralizar(string texto) {

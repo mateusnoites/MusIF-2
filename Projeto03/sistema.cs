@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 
 class Sistema {
   private static Playlist[] playlists = new Playlist[10];
   public static int nPlaylist;
+  private static List<Musica> musicas = new List<Musica>();
 
   public static void PlaylistInserir(Playlist obj) {
     // Verifica o tamanho do vetor
@@ -59,5 +61,39 @@ class Sistema {
       if(obj.GetID() == id) return i;
     }
     return -1;
+  }
+
+  public static void MusicaInserir(Musica obj) {
+    // Insere o objeto na lista
+    musicas.Add(obj);
+  }
+  public static List<Musica> MusicaListar() {
+    return musicas;
+  }
+  public static Musica MusicaListar(int id) {
+    // Percorre o vetor das Músicas e retorna a música com o ID informado.
+    foreach (Musica obj in musicas) 
+      if (obj.GetID() == id) return obj;
+    return null;
+  }
+  public static void MusicaAtualizar(Musica obj) {
+    // Localizar a música com o id informado
+    Musica aux = MusicaListar(obj.GetID());
+
+    // Atualiza os demais atributos da música
+    if (aux != null) {
+      aux.SetNome(obj.GetNome());
+      aux.SetDuracao(obj.GetDuracao());
+      aux.SetIdPlaylist(obj.GetIdPlaylist());
+    }
+  }
+  public static void MusicaExcluir(Musica obj) {
+    // Localizar o pet com o ID informado
+    Musica aux = MusicaListar(obj.GetID());
+    
+    // Remove a música da lista
+    if (aux != null) {
+      musicas.Remove(aux);
+    }
   }
 }

@@ -5,3 +5,41 @@ A música deve conter alguns atributos:
 - Lançamento (Int)
 - ID (Int)
 - Duração (DateTime)
+
+Interface:
+
+  Primeiro vai ter uma tela para escolher
+  o que quer visualizar (Playlists ou Músicas).
+  O título estará em uma caixa longa e será
+  "Visualizar".
+
+    Se escolher Playlists, irá aparecer o que antes
+    era o menu principal. Terá as opções de adicionar,
+    editar, apagar ou listar as playists.
+
+    Se escolher Músicas, irá aparecer as mesmas coisas,
+    com a diferença de que terá uma opção a mais para
+    ver todas as músicas de uma playlist. A exibição será
+    como no arquivo (frontmusic.txt).
+
+  A logo do projeto (MusIF) será exibida em uma
+  caixa, assim como era no primeiro menu.
+
+Navegação:
+  Também haverão botões de navegação. São eles:
+
+    Início (Z)
+    Fechar o MusIF (X)
+    Voltar (V)
+
+
+
+switch(Program.op) {
+  case 'A' : case 'a' : PlaylistInserir(); break;
+  case 'B' : case 'b' : MenuAtualizar(); break;
+  case 'C' : case 'c' : PlaylistExcluir(); break;
+  case 'D' : case 'd' : MenuListar(); break;
+  case 'Z' : case 'z' : Program.op = 'L'; break;
+  case 'X' : case 'x' : Finalizar(); break;
+  case 'V' : case 'v' : break;
+}
