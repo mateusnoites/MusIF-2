@@ -3,8 +3,6 @@ using System;
 public class Musica {
   private int id;
   private string nome;
-  private string artista;
-  private int lancamento;
   private DateTime duracao;
   private int idPlaylist;
   private int idCliente;
